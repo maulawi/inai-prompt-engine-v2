@@ -78,6 +78,7 @@ body{
 }
 .thumb-kuku{background:linear-gradient(135deg,#7A1A2B,#3E0B14);}
 .thumb-henna{background:linear-gradient(135deg,#5B1220,#2A0A10);}
+.duration-tag{display:inline-block;background:var(--gold);color:var(--maroon-dark);font-size:11px;font-weight:700;padding:3px 9px;border-radius:10px;margin-top:8px;letter-spacing:.5px;}
 .cta-bar{
   position:fixed;bottom:0;left:0;right:0;
   max-width:480px;margin:0 auto;
@@ -192,7 +193,10 @@ const ANGLES = [
   {id:"testimoni_h", productId:"henna", labelMalay:"Testimoni Pelanggan"}
 ];
 
-/* ==================== DATA: SCENARIOS ==================== */
+/* ==================== DATA: SCENARIOS ====================
+   Each scenario has its original 5-beat "beats" (Scene 1-5, ~10s)
+   PLUS a bespoke "extension" of 5 more beats (Scene 6-10, ~10s more)
+   used by the new "Scene Seterusnya" card so a marketer isn't capped at 10s. */
 const SCENARIOS = [
   {id:"kuku_hw_1", productId:"inai_kuku", angleId:"hw", titleMalay:"Makan malam anniversary, suami perasan", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Wife at her vanity mirror, choosing a maroon nail polish bottle",dialogue:{hasDialogue:false}},
@@ -200,169 +204,312 @@ const SCENARIOS = [
     {scene:3,purpose:"product",action:"Blowing on nails to dry, admiring her hands",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Walking out of the room; husband glances up and notices",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Cantiknya hari ni"}},
     {scene:5,purpose:"cta",action:"Wife smiles, holds his arm, both heading out the door",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Arriving at the restaurant, husband pulling out her chair",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Candlelight dinner, wife's hand resting on the table, nails catching the light",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Husband reaching for her hand across the table, smiling",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Selamat anniversary sayang"}},
+    {scene:9,purpose:"precta",action:"Wife smiling back, gently showing her hand toward the camera",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle beside her hand on the table, warm restaurant lighting",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_hw_2", productId:"inai_kuku", angleId:"hw", titleMalay:"Touch-up last minute, suami tunggu", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Hero shot of the Inai Kuku bottle on the counter",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Husband checking his watch by the door",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Dah siap ke tu"}},
     {scene:3,purpose:"product",action:"Wife doing a fast one-hand touch-up coat",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Close-up result, nails finished and glossy",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Bottle capped and set down, hero shot again",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Wife grabbing her bag, ready to leave",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Husband opening the door for her, glancing at her hands",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Cepatnya siap"}},
+    {scene:8,purpose:"peak",action:"Wife laughing, holding up her finished nails as she walks past him",dialogue:{hasDialogue:false}},
+    {scene:9,purpose:"precta",action:"Both stepping out together, door closing behind them",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Final close-up of the Inai Kuku bottle on the counter as the door clicks shut",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_hw_3", productId:"inai_kuku", angleId:"hw", titleMalay:"Isteri sapu inai sebelum suami balik kerja", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Wife glancing at the kitchen clock, realizing her husband is coming home soon",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Sitting in the living room, looking at her bare nails",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Pulling the Inai Kuku bottle out of her handbag",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Quickly applying a brown shade on the sofa",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Husband walks in and notices her hands as she smiles",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Cantiknya tangan awak hari ni"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Wife smiling, gently placing her hand over his",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Husband pulling her in for a quick hug",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Wife glancing at her nails again, quietly proud",dialogue:{hasDialogue:true,speaker:"wife",lineMalay:"Sempat jugak saya sapu tadi"}},
+    {scene:9,purpose:"precta",action:"Both sitting down together for the evening",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle on the side table beside them",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_hw_4", productId:"inai_kuku", angleId:"hw", titleMalay:"Suami perasan kuku isteri semasa makan malam", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Husband's POV watching his wife setting the dinner table",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Wife placing plates on the table, hands in view",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Husband's POV noticing the fresh nail colour on her hand",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Eh bila lagi awak sapu ni"}},
     {scene:4,purpose:"result",action:"Wife lifting her hand proudly to show the finished colour",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Couple smiling together over dinner",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Husband reaching over to hold her hand gently",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Wife turning her hand to show the colour better under the light",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Husband smiling, clearly charmed",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Confirm lain macam bila awak jaga diri"}},
+    {scene:9,purpose:"precta",action:"Both continuing dinner, relaxed and happy",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle resting on the kitchen counter in the background",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_friends_1", productId:"inai_kuku", angleId:"friends", titleMalay:"Dua kawan bersiap bersama", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Two friends sitting together getting ready, chatting",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"One friend opens her red Inai Kuku bottle",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"She applies it while the other watches",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Friend reacts, impressed by the colour and shine",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Eh cantiknya kuku awak"}},
     {scene:5,purpose:"cta",action:"Both friends compare hands together, laughing softly",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Both friends standing up, grabbing their bags to head out",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Walking together, still admiring their nails",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"One friend stopping to take a photo of both their hands together",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Jom kita snap gambar ni"}},
+    {scene:9,purpose:"precta",action:"Both posing and laughing for the photo",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle tucked into one friend's bag as they walk off",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_friends_2", productId:"inai_kuku", angleId:"friends", titleMalay:"Kawan try pinjam inai", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Bottle sitting on a dresser among makeup items",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Friend picks it up, curious, reads the label",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Quick application on one hand as a trial",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Result shown close-up, colour fully dry",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Wah lawa gila"}},
     {scene:5,purpose:"cta",action:"She hands the bottle back with a satisfied nod",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Friend admiring her nails one more time before leaving",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Original owner smiling, pleased her friend liked it",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Friend asking where to get her own bottle",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Where you beli benda ni"}},
+    {scene:9,purpose:"precta",action:"Owner pointing to the label on the bottle, laughing",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle label held up clearly between them",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_md_1", productId:"inai_kuku", angleId:"md", titleMalay:"Anak sapukan inai untuk mak, kali pertama", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Mother sitting, hands resting on a table, bare nails",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Daughter carefully opens the brown shade, focused",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Daughter applying the polish slowly, concentrating",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Nails finished, drying",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Mother looks at her hands, quietly pleased; daughter smiles",dialogue:{hasDialogue:true,speaker:"mother",lineMalay:"Cantiknya sayang buatkan mak"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Daughter beaming, gently holding her mother's hand",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Mother turning her hand slowly to admire the colour",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Daughter reaching for her phone to take a photo of their hands together",dialogue:{hasDialogue:true,speaker:"daughter",lineMalay:"Jom kita gambar sekali mak"}},
+    {scene:9,purpose:"precta",action:"Both posing together, hands side by side",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle placed between their joined hands",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_md_2", productId:"inai_kuku", angleId:"md", titleMalay:"Ibu & anak bersiap untuk majlis keluarga", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Both seated side by side with their own bottles",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Mother applies maroon, daughter applies red",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Both blowing on their nails at the same time",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Comparing hands together, smiling",dialogue:{hasDialogue:true,speaker:"daughter",lineMalay:"Mak cantiklah warna ni"}},
     {scene:5,purpose:"cta",action:"Standing up together, ready to leave",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Walking together toward the front door",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Mother pausing to check her nails once more in the hallway mirror",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Daughter smiling, offering her arm to her mother",dialogue:{hasDialogue:true,speaker:"daughter",lineMalay:"Jom mak kita pergi"}},
+    {scene:9,purpose:"precta",action:"Both stepping out of the house together",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle left neatly on the hallway table",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_md_3", productId:"inai_kuku", angleId:"md", titleMalay:"Anak bantu mak sebelum ke pasar malam", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Mother and daughter getting ready to head out for the night",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Daughter noticing her mother's bare, plain nails",dialogue:{hasDialogue:true,speaker:"daughter",lineMalay:"Mak kuku mak kosong je lagi"}},
     {scene:3,purpose:"process",action:"Daughter pulling the Inai Kuku bottle from her handbag",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Daughter carefully applying a maroon shade to her mother's nails",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Mother and daughter walking to the night market together, laughing",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Arriving at the entrance of the night market, lights glowing",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Mother glancing at her nails again, smiling",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Daughter pointing out a stall, both excited",dialogue:{hasDialogue:true,speaker:"daughter",lineMalay:"Jom kita pergi tu dulu"}},
+    {scene:9,purpose:"precta",action:"Both walking hand in hand through the market",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle tucked in the daughter's small bag",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_wedding_1", productId:"inai_kuku", angleId:"wedding", titleMalay:"Touch-up last minute sebelum ke majlis", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"An outfit laid out, guest already dressed, checking time",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Grabbing the Inai Kuku bottle from her bag",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Fast, precise application, close on brush strokes",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Kejap je ni"}},
     {scene:4,purpose:"result",action:"Nails finished, matching her outfit",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Picking up her bag, heading for the door",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Arriving at the wedding venue, greeted by other guests",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Guest lifting her hand to greet a friend, nails catching the light",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Friend noticing and complimenting her",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Cantiknya kuku you hari ni"}},
+    {scene:9,purpose:"precta",action:"Guest smiling, glancing at her hand once more",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle glimpsed inside her open handbag",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_wedding_2", productId:"inai_kuku", angleId:"wedding", titleMalay:"Bridesmaid siapkan look sebelum majlis", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Bridesmaid in front of a mirror, adjusting her outfit",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Notices her bare nails, opens the bottle",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Applies quickly but carefully",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Checks the result against her outfit, satisfied",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Cantik gila tangan you"}},
     {scene:5,purpose:"cta",action:"Joins other bridesmaids walking toward the ceremony",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Standing in line with the other bridesmaids before the ceremony",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Adjusting her bouquet, hands clearly visible",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Another bridesmaid leaning over to look at her nails",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Where you sapu ni cantik gila"}},
+    {scene:9,purpose:"precta",action:"Both smiling as the ceremony music begins",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle in her clutch bag as she walks down the aisle",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_quick_1", productId:"inai_kuku", angleId:"quick", titleMalay:"Lambat, sapu inai dalam masa seminit", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Phone alarm or clock visible, woman realizes she is late",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Alamak lambat dah"}},
     {scene:2,purpose:"context",action:"Grabs the small 5ml bottle from her bag",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Ultra-fast one-stroke application per nail",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Blows on nails while grabbing her keys",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Out the door, hands visible holding her bag",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Rushing to catch a ride outside",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Sitting down, finally catching her breath, glancing at her nails",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Realizing she made it in time, relieved smile",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Nasib baik sempat jugak"}},
+    {scene:9,purpose:"precta",action:"Checking her nails once more, satisfied despite the rush",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the small 5ml Inai Kuku bottle tucked in her bag pocket",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_quick_2", productId:"inai_kuku", angleId:"quick", titleMalay:"Rutin pagi sebelum kerja", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Normal morning routine, hair and light makeup",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Adds a coat of brown as the final step",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Application shown in a calm, practiced motion",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Nails finished, natural and neat",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Picking up a coffee cup, heading out",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Walking to the car, coffee in one hand",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Glancing at her nails while waiting at a traffic light",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Arriving at the office, greeted by a colleague who notices",dialogue:{hasDialogue:true,speaker:"colleague",lineMalay:"Kuku you cantik pagi ni"}},
+    {scene:9,purpose:"precta",action:"Smiling, holding her coffee cup with her nails visible",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle sitting on her bathroom shelf at home",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_problem_1", productId:"inai_kuku", angleId:"problem", titleMalay:"Kuku sumbing, betulkan cepat", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Close-up on chipped, uneven bare nails",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Slight frustration, reaching for the Inai Kuku bottle",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Applying evenly over the problem nails",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Fully dry, even colour now",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Hands shown confidently, problem resolved",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Dah okay dah ni"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Standing up, heading toward the door with new confidence",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Meeting a friend outside, hands relaxed and visible",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Friend noticing the neat nails immediately",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Eh kuku you dah cantik balik"}},
+    {scene:9,purpose:"precta",action:"Smiling, glancing down at her own hands",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle sitting on the dresser behind her",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_problem_2", productId:"inai_kuku", angleId:"problem", titleMalay:"Kuku kosong vs lepas guna", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Plain bare nails held up to camera, casual tone",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Opening the bottle, brush lifted out",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Applying naturally, no rush",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Nails now fully coloured, held up again",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Tengok bezanya"}},
     {scene:5,purpose:"reveal",action:"Casual satisfied gesture, e.g. a slight hand wave",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Continuing her day, hands relaxed on a table",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Scrolling her phone, nails clearly in frame",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"A friend messages asking about her nails, she takes a photo",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Dah boleh reply dengan gambar ni"}},
+    {scene:9,purpose:"precta",action:"Snapping a quick photo of her hand",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle beside her phone on the table",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_problem_3", productId:"inai_kuku", angleId:"problem", titleMalay:"Kuku tak kemas dibetulkan dalam bilik", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Close-up of chipped, uneven bare nails in the bedroom",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Reaching for the Inai Kuku bottle from a bedside drawer",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Applying an even coat of red polish",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Blowing gently on the nails while waiting for them to dry",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Lifting both hands to the mirror, satisfied with the result",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Sekarang confident nak keluar dah"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Grabbing her bag, ready to head out",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Walking out of the bedroom with a spring in her step",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Meeting her friends outside, showing off her hands",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Wah cantiknya last minute pun boleh"}},
+    {scene:9,purpose:"precta",action:"Laughing together as they walk off",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle left on the bedside table",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_problem_4", productId:"inai_kuku", angleId:"problem", titleMalay:"Wanita korporat selesaikan kuku kosong di pejabat", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Looking at bare nails while typing at her office desk",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Opening a drawer and finding the Inai Kuku bottle",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Applying a brown shade quickly during a short break",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Blowing on nails while waiting before a meeting",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Walking into the meeting room with visible confidence",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Sekarang baru rasa lengkap sikit"}}
-  ]},
-
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Sitting down at the meeting table",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Placing her hands on the table as she speaks",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"A colleague across the table notices her nails",dialogue:{hasDialogue:true,speaker:"colleague",lineMalay:"Kuku you kemas je walaupun busy"}},
+    {scene:9,purpose:"precta",action:"Smiling briefly before continuing the meeting",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle tucked in her desk drawer",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_beautician_1", productId:"inai_kuku", angleId:"beautician", titleMalay:"Beautician demo warna kuku di salon", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Beautician showing a bottle of Inai Kuku to a salon client at the counter",dialogue:{hasDialogue:true,speaker:"beautician",lineMalay:"Awak nak tunjuk warna baru ni tak"}},
     {scene:2,purpose:"context",action:"Opening the bottle and dipping the brush under bright treatment lights",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Carefully applying the polish to the client's nails in macro close-up",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Blowing gently on the nails to help them dry",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Client lifting her hand at the counter, admiring the finished colour",dialogue:{hasDialogue:true,speaker:"client",lineMalay:"Cantiknya boleh tahan lah hasil dia"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Beautician smiling, packing away her tools",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Client standing up, still looking at her hands",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Client asking to book another session",dialogue:{hasDialogue:true,speaker:"client",lineMalay:"Boleh book lagi untuk minggu depan"}},
+    {scene:9,purpose:"precta",action:"Beautician nodding, writing down the appointment",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle displayed on the salon counter",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_beautician_2", productId:"inai_kuku", angleId:"beautician", titleMalay:"Beautician kongsi trend warna di kedai kosmetik", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Beautician arranging bottles on the cosmetic shop counter while talking",dialogue:{hasDialogue:true,speaker:"beautician",lineMalay:"Ramai je tanya pasal warna baru ni"}},
     {scene:2,purpose:"context",action:"Picking up a bottle from the shelf",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Opening the cap to show the polish texture",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Swatching the colour on a tester card",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"A customer picking up a bottle to purchase",dialogue:{hasDialogue:true,speaker:"customer",lineMalay:"Okay saya ambil satu botol ni"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Beautician wrapping the bottle for the customer",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Customer thanking her, holding the small bag",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Another customer nearby overhears and gets curious",dialogue:{hasDialogue:true,speaker:"new customer",lineMalay:"Eh warna apa tu cantik"}},
+    {scene:9,purpose:"precta",action:"Beautician smiling, turning to help the new customer",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku display rack, several colours in view",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_ejen_1", productId:"inai_kuku", angleId:"ejen", titleMalay:"Ejen perkenalkan produk di booth pameran", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Agent arranging bottles on a booth table at an event, banner in the background",dialogue:{hasDialogue:true,speaker:"agent",lineMalay:"Jom singgah sekejap tengok produk kami"}},
     {scene:2,purpose:"context",action:"Lifting a bottle to show a visitor at the booth",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Opening the cap to reveal the brush applicator",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Swatching a sample colour onto a card",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Visitor nodding and picking up a boxed bottle to purchase",dialogue:{hasDialogue:true,speaker:"visitor",lineMalay:"Okay saya nak beli satu"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Agent handing over the receipt with a smile",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Visitor tucking the box into her bag",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Another visitor stopping by, curious about the booth",dialogue:{hasDialogue:true,speaker:"new visitor",lineMalay:"Ni jual apa ni"}},
+    {scene:9,purpose:"precta",action:"Agent turning to greet the new visitor warmly",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the booth display with the Inai Kuku banner in view",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_pengantin_1", productId:"inai_kuku", angleId:"pengantin", titleMalay:"Pengantin sapu inai sebelum majlis sendiri", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Bride looking into a large mirror in the bridal room, smiling nervously",dialogue:{hasDialogue:true,speaker:"bride",lineMalay:"Tak sangka hari ni dah sampai"}},
     {scene:2,purpose:"decision",action:"Noticing her bare nails at the vanity table",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Pulling out the Inai Kuku bottle from her bag",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Carefully applying a maroon shade to match her bridal outfit",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Standing in the bridal room holding her bouquet, looking complete and happy",dialogue:{hasDialogue:true,speaker:"bride",lineMalay:"Sekarang baru rasa lengkap"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"A knock at the door, someone calling her to the ceremony",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Bride taking one last look in the mirror",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Stepping out of the bridal room toward the hall",dialogue:{hasDialogue:true,speaker:"bride",lineMalay:"Okay saya dah bersedia"}},
+    {scene:9,purpose:"precta",action:"Walking gracefully down the corridor",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle left neatly on the bridal vanity",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_influencer_1", productId:"inai_kuku", angleId:"influencer", titleMalay:"Influencer kongsi produk di meja solek", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Influencer talking directly to camera at her vanity with a ring light",dialogue:{hasDialogue:true,speaker:"influencer",lineMalay:"Hai semua hari ni nak share satu produk"}},
     {scene:2,purpose:"context",action:"Holding up the Inai Kuku bottle to the camera",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Applying the maroon polish slowly for the camera",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Showing her hand close to the camera",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Waving and smiling to close the video",dialogue:{hasDialogue:true,speaker:"influencer",lineMalay:"Jangan lupa cuba sendiri okay"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Influencer checking her phone, comments already coming in",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Reading a comment out loud, smiling",dialogue:{hasDialogue:true,speaker:"influencer",lineMalay:"Ramai tanya kat mana nak beli"}},
+    {scene:8,purpose:"peak",action:"Pointing to a link on screen",dialogue:{hasDialogue:false}},
+    {scene:9,purpose:"precta",action:"Blowing a kiss to the camera before ending",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle placed neatly beside her ring light",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_influencer_2", productId:"inai_kuku", angleId:"influencer", titleMalay:"Influencer demo produk di studio putih", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Influencer standing in a plain white studio, holding the bottle to camera",dialogue:{hasDialogue:true,speaker:"influencer",lineMalay:"Hari ni saya nak demo produk ni betul betul"}},
     {scene:2,purpose:"context",action:"Placing the bottle on a white studio table",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Applying the polish with slow, deliberate strokes",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Showing the finished nails close to the camera",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Waving to camera to end the demo",dialogue:{hasDialogue:true,speaker:"influencer",lineMalay:"Okay tu je untuk demo hari ni"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Influencer stepping back from the camera setup",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Adjusting the lighting for a final shot",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Holding the bottle up one last time for a clean product shot",dialogue:{hasDialogue:true,speaker:"influencer",lineMalay:"Last one shot untuk produk ni"}},
+    {scene:9,purpose:"precta",action:"Smiling directly at the lens",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up hero shot of the Inai Kuku bottle centered on the white studio table",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"kuku_testimoni_1", productId:"inai_kuku", angleId:"testimoni", titleMalay:"Pelajar kongsi testimoni di kafe", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Student sitting at a cafe table holding a cup of coffee",dialogue:{hasDialogue:true,speaker:"student",lineMalay:"Saya nak share pengalaman guna produk ni"}},
     {scene:2,purpose:"context",action:"Showing her nails before using the product, looking unimpressed",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Pulling the bottle out of her bag",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Showing the finished nails, clearly pleased",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Lifting her coffee cup and smiling at the camera",dialogue:{hasDialogue:true,speaker:"student",lineMalay:"Memang worth it nak cuba"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Student packing up her things at the cafe",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Friend at the next table leaning over, curious",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Friend asking about the product",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Boleh share link tak"}},
+    {scene:9,purpose:"precta",action:"Student nodding, pulling out her phone to share",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Inai Kuku bottle sitting beside her coffee cup",dialogue:{hasDialogue:false}}
+  ]}},
 
   {id:"henna_grey_1", productId:"henna", angleId:"grey", titleMalay:"Perasan uban, sapu Coco Black", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Close-up at the mirror, noticing grey roots",dialogue:{hasDialogue:false}},
@@ -370,169 +517,312 @@ const SCENARIOS = [
     {scene:3,purpose:"process",action:"Combing the colour through evenly, per the official usage steps",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Shower cap on, waiting implied via a cut",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Hair rinsed and dried, grey now evenly covered",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Dah tak nampak uban dah"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Drying her hair with a hairdryer, checking the mirror",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Running her fingers through her hair, admiring the even colour",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Family member walking in, noticing immediately",dialogue:{hasDialogue:true,speaker:"family member",lineMalay:"Eh rambut mak nampak lain terus"}},
+    {scene:9,purpose:"precta",action:"Smiling proudly at the compliment",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle placed on the bathroom shelf",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_grey_2", productId:"henna", angleId:"grey", titleMalay:"Bersiap malam sebelum majlis, guna Chocolate Brown", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Evening setting, laying out the product before bed",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Sectioning hair, applying the colour carefully",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Combing through to the roots specifically",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Cap on, short wait per the 15-minute grey-coverage timing",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Rinsed result, roots evenly toned, ready for the event",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Cantiknya warna ni"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Styling her hair in front of the mirror the next morning",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Getting dressed for the event, hair looking fresh",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Husband complimenting her as they head out",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Nampak segar rambut awak"}},
+    {scene:9,purpose:"precta",action:"Smiling, taking his arm as they leave",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour box on the dresser",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_transform_1", productId:"henna", angleId:"transform", titleMalay:"Tukar warna rambut baru, reveal penuh", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Looking at hair in the mirror, contemplative",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Picking up the Caramel Gold box, decision made",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Application process shown following the official usage steps",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Rinsing, towel-drying",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Full reveal, hair down, new colour catching the light",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Suka gila warna baru ni"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Styling the hair into loose waves",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Taking a photo of the new look in the mirror",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Posting the photo, replies starting to come in",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Semua orang tanya warna apa ni"}},
+    {scene:9,purpose:"precta",action:"Smiling at her phone, replying to comments",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Caramel Gold Henna Hair Colour box beside her phone",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_transform_2", productId:"henna", angleId:"transform", titleMalay:"Reaksi kawan tengok warna baru", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Friend arrives, has not seen the new colour yet",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Woman turns around, revealing her Honey Brown hair",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Friend's face lights up, genuinely surprised",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Cantiknya warna baru you"}},
     {scene:4,purpose:"result",action:"Both laughing, friend touching the hair lightly",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Casual selfie-style moment between the two",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Both looking at the selfie together, laughing",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Friend asking to touch the hair, amazed by the texture",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Friend asking where she got it done",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"You buat kat mana ni"}},
+    {scene:9,purpose:"precta",action:"Woman smiling, pulling out the Henna Hair Colour box to show her",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Honey Brown Henna Hair Colour box held between them",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_transform_3", productId:"henna", angleId:"transform", titleMalay:"Isteri reveal warna baru di rumah", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Looking at grey roots in the bathroom mirror at home",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Preparing the Henna Hair Colour bottle",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Combing the colour through evenly",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Wearing a shower cap while waiting",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Removing the towel to reveal the new colour",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Dah tak nampak uban dah sekarang"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Drying and styling her hair at the mirror",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Walking out to the living room to show her husband",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Husband looking up, pleasantly surprised",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Wah lain terus rupa awak"}},
+    {scene:9,purpose:"precta",action:"Wife smiling, turning her head to show the colour",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle on the bathroom counter",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_hw_1", productId:"henna", angleId:"hw_h", titleMalay:"Warna rambut baru, suami perasan", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Wife finishing her hair in the bathroom mirror",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Fluffing and finishing touches on the Burgundy colour",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Walking into the living room",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Husband looks up from what he is doing, notices",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Cantiknya warna rambut ni"}},
     {scene:5,purpose:"cta",action:"A warm, quiet moment between them",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Sitting together on the sofa, husband still admiring her hair",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Wife tucking her hair behind her ear, smiling",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Husband gently touching a strand, impressed",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Rasa lembut je walaupun baru warna"}},
+    {scene:9,purpose:"precta",action:"Wife leaning into him, content",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour box on the side table",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_hw_2", productId:"henna", angleId:"hw_h", titleMalay:"Sapu warna kat rumah, suami ada dekat", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Product laid out on the bathroom counter",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Wife applying the colour herself, methodical",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Husband passing by, briefly glancing in",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Wife covers her hair with the shower cap",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Casual continuation of the evening, waiting implied",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Rinsing her hair in the bathroom",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Drying her hair, checking the result in the mirror",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Walking out to show her husband the finished colour",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Cantiknya, sekata betul"}},
+    {scene:9,purpose:"precta",action:"Wife smiling, running her fingers through her hair",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle left on the bathroom counter",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_hw_3", productId:"henna", angleId:"hw_h", titleMalay:"Suami isteri cuba warna baru di studio", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Couple standing together in a plain white studio, chatting",dialogue:{hasDialogue:true,speaker:"wife",lineMalay:"Kita nak cuba tukar warna rambut hari ni"}},
     {scene:2,purpose:"context",action:"Wife showing a Royal Chestnut coloured bottle",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Wife applying the colour to her own hair carefully",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Husband watching while holding a camera, impressed",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Nampak sabar betul awak buat sendiri"}},
     {scene:5,purpose:"cta",action:"Couple taking a photo together after the reveal",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Looking at the photo together on the camera screen",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Wife zooming into the photo to check the colour",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Husband smiling, clearly proud of her",dialogue:{hasDialogue:true,speaker:"husband",lineMalay:"Confirm lain level rambut awak sekarang"}},
+    {scene:9,purpose:"precta",action:"Both laughing, packing up the studio gear",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Royal Chestnut Henna Hair Colour bottle on the studio table",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_md_1", productId:"henna", angleId:"md_h", titleMalay:"Anak tolong mak sapu warna", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Mother seated, daughter standing behind with the product",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"decision",action:"Daughter carefully applying and combing through",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Sectioning and covering all the grey evenly",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Cap on, short wait",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Mother's hair evenly coloured, both pleased",dialogue:{hasDialogue:true,speaker:"mother",lineMalay:"Terima kasih sayang"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Daughter drying her mother's hair gently",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Mother looking in the mirror, touching her hair",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Mother turning to hug her daughter",dialogue:{hasDialogue:true,speaker:"mother",lineMalay:"Sayang sangat ada anak macam kau"}},
+    {scene:9,purpose:"precta",action:"Daughter smiling, hugging her back",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle on the bathroom counter beside them",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_md_2", productId:"henna", angleId:"md_h", titleMalay:"Ibu & anak sapu warna bersama sebelum majlis", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Two boxes set out side by side",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Mother and daughter each applying their own shade",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Helping each other with the back sections",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Both finished, comparing results",dialogue:{hasDialogue:true,speaker:"daughter",lineMalay:"Sama cantik mak"}},
     {scene:5,purpose:"cta",action:"Getting ready to leave for the event together",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Walking together toward the car",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Mother adjusting her daughter's hair one last time",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Daughter smiling, checking both their hair in a small mirror",dialogue:{hasDialogue:true,speaker:"daughter",lineMalay:"Sama cantik kita berdua mak"}},
+    {scene:9,purpose:"precta",action:"Both laughing as they get into the car",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the two Henna Hair Colour boxes left on the counter at home",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_md_3", productId:"henna", angleId:"md_h", titleMalay:"Anak bantu mak sapu warna bersama", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Mother sitting in the living room while daughter stands behind her",dialogue:{hasDialogue:true,speaker:"mother",lineMalay:"Nak mak tolong sapukan warna rambut ni"}},
     {scene:2,purpose:"context",action:"Daughter preparing the Coco Black colour",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Daughter applying the colour section by section",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Mother and daughter chatting while waiting",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Mother looking at the result in a small mirror, touched",dialogue:{hasDialogue:true,speaker:"mother",lineMalay:"Terima kasih sayang cantik betul hasilnya"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Mother hugging her daughter tightly",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Daughter smiling, clearly happy she could help",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Mother standing up to show the result in a bigger mirror",dialogue:{hasDialogue:true,speaker:"mother",lineMalay:"Nampak lagi muda rasanya"}},
+    {scene:9,purpose:"precta",action:"Both laughing together",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Coco Black Henna Hair Colour bottle on the living room table",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_before_1", productId:"henna", angleId:"before", titleMalay:"Sapu warna malam sebelum kahwin", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Evening prep, product set out with a mirror nearby",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Careful full-head application, following the official usage steps",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Shower cap on, waiting cue",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Rinsed and dried result",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Trying on an outfit, hair now event-ready",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Siap dah untuk esok"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Hanging the outfit back up, satisfied with the preparation",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Setting an alarm for the morning, hair still looking fresh",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Getting a message from a friend asking if she's ready",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Dah siap semua untuk esok"}},
+    {scene:9,purpose:"precta",action:"Smiling as she puts her phone down",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour box packed neatly in her overnight bag",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_before_2", productId:"henna", angleId:"before", titleMalay:"Touch-up akar rambut sebelum majlis", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Checking roots in the mirror, short on time",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Targeted application at the roots only",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Combing through quickly but evenly",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Short wait cue, the 15-minute root timing",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Rinsed, styled, heading out the door",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Walking briskly toward the car",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Checking her roots one more time in the car mirror",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Arriving at the event just in time",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Nasib baik sempat betulkan akar tadi"}},
+    {scene:9,purpose:"precta",action:"Smiling as she steps out of the car",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle left on her bathroom shelf at home",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_routine_1", productId:"henna", angleId:"routine", titleMalay:"Rutin self-care termasuk touch-up warna", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Calm self-care setting: candle, towel, mirror",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Product applied as part of the routine, relaxed pace",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Optional keratin mask or conditioner step shown",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Rinsing, hair feeling and looking cared-for",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Finished hair, calm satisfied close",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Making a cup of tea, feeling relaxed",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Sitting by the window, hair still slightly damp",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Scrolling through photos, comparing to before",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Rasa lain betul lepas jaga rambut sendiri"}},
+    {scene:9,purpose:"precta",action:"Smiling contentedly, sipping her tea",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle on the bathroom shelf, candle still lit nearby",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_routine_2", productId:"henna", angleId:"routine", titleMalay:"Ikut proses guna yang betul, gaya UGC", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Dry, brushed hair - the correct starting state",dialogue:{hasDialogue:false}},
     {scene:2,purpose:"context",action:"Gloves and shoulder cover on, product shaken and unlocked",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Combed through evenly, cap on",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Rinsed until clean, conditioner step",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Dried and brushed, final result shown",dialogue:{hasDialogue:false}}
-  ]},
-
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Filming herself brushing through the finished hair",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Checking the camera, satisfied with the footage",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Adding a quick voice note about the result",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Ni hasil kalau ikut step yang betul"}},
+    {scene:9,purpose:"precta",action:"Smiling at the camera before stopping the recording",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour box placed beside her phone tripod",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_beautician_1", productId:"henna", angleId:"beautician_h", titleMalay:"Beautician demo warna rambut di salon", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Beautician combing a client's hair in a salon chair",dialogue:{hasDialogue:true,speaker:"beautician",lineMalay:"Ramai pelanggan puas hati dengan warna ni"}},
     {scene:2,purpose:"context",action:"Showing the Henna Hair Colour bottle at the counter",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Applying the colour in even sections",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Placing a shower cap on the client",dialogue:{hasDialogue:true,speaker:"beautician",lineMalay:"Tunggu je dalam empat puluh lima minit"}},
     {scene:5,purpose:"cta",action:"Client admiring the evenly toned result in a large mirror",dialogue:{hasDialogue:true,speaker:"client",lineMalay:"Wah warna dia memang sekata betul"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Beautician styling the client's hair into a neat finish",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Client turning her head side to side in the mirror",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Client asking to book her next appointment already",dialogue:{hasDialogue:true,speaker:"client",lineMalay:"Boleh book untuk bulan depan"}},
+    {scene:9,purpose:"precta",action:"Beautician smiling, writing the appointment down",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle displayed at the salon counter",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_ejen_1", productId:"henna", angleId:"ejen_h", titleMalay:"Ejen demo warna rambut di booth", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Agent arranging hair colour samples at an event booth",dialogue:{hasDialogue:true,speaker:"agent",lineMalay:"Ni kita ada dua belas pilihan warna"}},
     {scene:2,purpose:"context",action:"Lifting a Chocolate Brown bottle to show a visitor",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Demonstrating how to pump and comb the colour through",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Showing the smooth result on a hair sample",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Visitor picking up a box to purchase",dialogue:{hasDialogue:true,speaker:"visitor",lineMalay:"Okay saya nak beli untuk cuba"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Agent packing the box neatly into a bag",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Visitor thanking her, excited to try it",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Another visitor stopping by, curious about the samples",dialogue:{hasDialogue:true,speaker:"new visitor",lineMalay:"Warna apa yang paling popular"}},
+    {scene:9,purpose:"precta",action:"Agent turning to greet them warmly",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the full row of Henna Hair Colour samples at the booth",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_ejen_2", productId:"henna", angleId:"ejen_h", titleMalay:"Ejen tunjuk before after di kedai kosmetik", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Agent showing a customer a before photo at the shop counter",dialogue:{hasDialogue:true,speaker:"agent",lineMalay:"Ni gambar pelanggan sebelum guna produk kami"}},
     {scene:2,purpose:"decision",action:"Lifting a Chocolate Brown bottle to explain",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Showing the after photo beside the before photo",dialogue:{hasDialogue:true,speaker:"agent",lineMalay:"Tengok beza dia memang jelas"}},
     {scene:4,purpose:"transition",action:"Explaining the application process patiently",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Customer picking up a box to try it herself",dialogue:{hasDialogue:true,speaker:"customer",lineMalay:"Okay saya nak cuba yang ni jugak"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Agent wrapping the box for the customer",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Customer tucking it into her bag, smiling",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Customer asking a quick question about the timing",dialogue:{hasDialogue:true,speaker:"customer",lineMalay:"Berapa lama nak tunggu untuk hasil ni"}},
+    {scene:9,purpose:"precta",action:"Agent explaining patiently, holding up the box",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the before-and-after photo display on the counter",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_pengantin_1", productId:"henna", angleId:"pengantin_h", titleMalay:"Pengantin sapu warna rambut sebelum majlis", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Bride looking at the wedding date on a calendar in the bridal room, slightly anxious",dialogue:{hasDialogue:true,speaker:"bride",lineMalay:"Esok dah majlis tapi rambut belum siap"}},
     {scene:2,purpose:"decision",action:"Pulling the Henna Hair Colour bottle out of her bag, relieved",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Carefully applying a Burgundy shade at the bathroom mirror",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Waiting while going through her checklist",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Standing in the bridal room with her hair done, feeling ready",dialogue:{hasDialogue:true,speaker:"bride",lineMalay:"Sekarang baru rasa dah sedia untuk esok"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Bride setting her alarm, hair still looking fresh",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Laying out her outfit for the next day",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Getting a call from a bridesmaid checking in",dialogue:{hasDialogue:true,speaker:"bride",lineMalay:"Semua dah siap termasuk rambut"}},
+    {scene:9,purpose:"precta",action:"Smiling, ending the call with relief",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour box tucked into her overnight bag",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_korporat_1", productId:"henna", angleId:"korporat_h", titleMalay:"Wanita korporat touch up sebelum kerja", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Looking at grey roots in the bedroom mirror in the morning",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Akar rambut ni dah mula nampak putih"}},
     {scene:2,purpose:"decision",action:"Preparing the Henna Hair Colour bottle before work",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Applying colour specifically to the roots",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Checking the time while waiting",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Getting ready for work with visible confidence",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Sekarang confident nak jumpa client"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Walking briskly to her car, bag in hand",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Checking her hair in the car mirror before driving off",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Arriving at the office, greeted warmly by a colleague",dialogue:{hasDialogue:true,speaker:"colleague",lineMalay:"Nampak fresh pagi ni"}},
+    {scene:9,purpose:"precta",action:"Smiling, walking confidently into the building",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle left on her bathroom shelf at home",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_korporat_2", productId:"henna", angleId:"korporat_h", titleMalay:"Wanita korporat selesaikan uban di pejabat", structureTemplate:"transformation_reveal", beats:[
     {scene:1,purpose:"before",action:"Checking grey hair in a small mirror during a break at her office desk",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Uban ni buat nampak lebih tua sikit"}},
     {scene:2,purpose:"decision",action:"Pulling the Henna Hair Colour bottle from her bag",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"process",action:"Quickly applying colour to the roots in the office bathroom",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"transition",action:"Checking the time while waiting",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"reveal",action:"Returning to her desk with renewed confidence",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Sekarang tak nampak uban dah langsung"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Sitting back down, continuing her work with ease",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"A colleague walking past, glancing at her hair",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Colleague complimenting her quietly",dialogue:{hasDialogue:true,speaker:"colleague",lineMalay:"Rambut you nampak lagi kemas hari ni"}},
+    {scene:9,purpose:"precta",action:"Smiling briefly before returning to her screen",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle tucked in her office bag",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_influencer_1", productId:"henna", angleId:"influencer_h", titleMalay:"Gadis muda kongsi rutin warna rambut", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Young woman talking to camera at her vanity with a ring light",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Hari ni saya nak share rutin warna rambut saya"}},
     {scene:2,purpose:"context",action:"Showing a Honey Brown bottle to the camera",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Applying the colour while explaining the process",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Waiting under a shower cap while scrolling her phone",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Showing the finished result to the camera",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Tengok warna dia terang tapi natural"}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Scrolling through early comments on her phone",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Reading one out loud, smiling",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Ramai tanya boleh tahan lama tak"}},
+    {scene:8,purpose:"peak",action:"Nodding confidently at the camera",dialogue:{hasDialogue:false}},
+    {scene:9,purpose:"precta",action:"Running her fingers through her hair one more time",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Honey Brown Henna Hair Colour bottle beside her ring light",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_influencer_2", productId:"henna", angleId:"influencer_h", titleMalay:"Influencer soft sell warna rambut di kafe", structureTemplate:"product_demo", beats:[
     {scene:1,purpose:"hook",action:"Influencer sitting at a cafe table holding her phone",dialogue:{hasDialogue:true,speaker:"influencer",lineMalay:"Ramai tanya saya pakai warna rambut apa"}},
     {scene:2,purpose:"context",action:"Pulling the bottle out of her handbag",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Showing the coloured ends of her hair",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Touching her hair and smiling",dialogue:{hasDialogue:true,speaker:"influencer",lineMalay:"Rasa rambut pun lembut lepas guna"}},
     {scene:5,purpose:"cta",action:"Continuing to sip her drink, smiling at camera",dialogue:{hasDialogue:false}}
-  ]},
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Packing up her things at the cafe table",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Standing up, hair catching the afternoon light",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"A stranger at the next table compliments her hair",dialogue:{hasDialogue:true,speaker:"stranger",lineMalay:"Cantik warna rambut awak"}},
+    {scene:9,purpose:"precta",action:"Smiling, thanking the stranger politely",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Henna Hair Colour bottle inside her open handbag",dialogue:{hasDialogue:false}}
+  ]}},
   {id:"henna_testimoni_1", productId:"henna", angleId:"testimoni_h", titleMalay:"Pelajar review sebelum ke event", structureTemplate:"reaction_flow", beats:[
     {scene:1,purpose:"hook",action:"Student sitting in her dorm room holding her phone to record",dialogue:{hasDialogue:true,speaker:"student",lineMalay:"Saya nak review produk untuk korang semua"}},
     {scene:2,purpose:"context",action:"Showing an Ash Brown bottle to the camera",dialogue:{hasDialogue:false}},
     {scene:3,purpose:"product",action:"Applying the colour while explaining the process",dialogue:{hasDialogue:false}},
     {scene:4,purpose:"result",action:"Waiting while doing homework",dialogue:{hasDialogue:false}},
     {scene:5,purpose:"cta",action:"Showing her finished hair before heading out to the event",dialogue:{hasDialogue:true,speaker:"student",lineMalay:"Confident je nak pergi event lepas ni"}}
-  ]}
+  ], extension:{beats:[
+    {scene:6,purpose:"continue",action:"Walking out of her dorm room toward the event",dialogue:{hasDialogue:false}},
+    {scene:7,purpose:"detail",action:"Meeting friends outside, hair looking fresh",dialogue:{hasDialogue:false}},
+    {scene:8,purpose:"peak",action:"Friend noticing immediately",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Wah rambut you cantik gila hari ni"}},
+    {scene:9,purpose:"precta",action:"Smiling, linking arms with her friend",dialogue:{hasDialogue:false}},
+    {scene:10,purpose:"cta",action:"Close-up of the Ash Brown Henna Hair Colour bottle left on her dorm desk",dialogue:{hasDialogue:false}}
+  ]}}
 ];
 
 /* ==================== DATA: STYLES ==================== */
@@ -548,6 +838,117 @@ const STRUCTURE_LABELS = {
   product_demo:["Hero Shot","Prep Produk","Application","Result","Hero Shot"],
   transformation_reveal:["Before","Decision","Process","Transition","Reveal"]
 };
+const EXTENSION_LABELS = ["Lanjutan","Detail","Klimaks","Pra-CTA","CTA Penutup"];
+
+/* ==================== DATA: MOVIE INSPIRED GENRES ====================
+   Each genre is a 20-second, 2-part story (Part 1 = setup/tension, Part 2 = turn/resolution).
+   A handful of beats reference the product directly and differ per product -
+   those "action" fields are objects keyed by productId instead of plain strings,
+   resolved at generate-time via resolveAction(). */
+const GENRES = [
+  {id:"thriller", labelMalay:"Thriller", descMalay:"Tegang macam thriller sebenar - produk baru muncul lewat sebagai twist yang melegakan",
+    mood:"dark, tense, cinematic thriller", lighting:"low-key dramatic lighting, deep shadows", camera:"handheld with sudden pushes, tight framing",
+    part1Beats:[
+      {scene:1,purpose:"hook",action:"Woman walking quickly through a dim corridor at night, glancing over her shoulder",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Rasa macam ada orang ikut saya ni"}},
+      {scene:2,purpose:"tension",action:"A door creaks somewhere behind her, she freezes mid-step",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Sapa kat sana"}},
+      {scene:3,purpose:"tension",action:"Hiding behind a wall, gripping her phone tightly, breathing fast",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Tolong jangan dekat sangat"}},
+      {scene:4,purpose:"build",action:"A shadow moves quickly across the wall in front of her",dialogue:{hasDialogue:false}},
+      {scene:5,purpose:"midpoint",action:"Complete silence falls, she slowly peeks around the corner",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Dah okay ke ni"}}
+    ],
+    part2Beats:[
+      {scene:6,purpose:"twist_setup",action:"It's only her cat brushing past a curtain in the wind - relief washes over her",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Alamak kucing rupanya, saya ni"}},
+      {scene:7,purpose:"pivot",action:"Laughing at herself, she checks her phone and sees a reminder notification",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:{inai_kuku:"Eh esok dah majlis kawin, kuku saya macam mana ni",henna:"Eh esok dah majlis kawin, rambut saya pun belum siap"}}},
+      {scene:8,purpose:"discovery",action:{inai_kuku:"Rummaging quickly through a drawer, finding the Inai Kuku bottle",henna:"Rummaging quickly through a drawer, finding the Henna Hair Colour bottle"},dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Nasib baik simpan ni dalam laci"}},
+      {scene:9,purpose:"action_reveal",action:{inai_kuku:"Applying the polish with quick, confident strokes, mood completely lifted",henna:"Applying the colour with quick, confident strokes, mood completely lifted"},dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Okay ni je pun dah settle satu masalah"}},
+      {scene:10,purpose:"ending",action:{inai_kuku:"Standing tall in front of the mirror, calm and ready, the Inai Kuku bottle visible beside her",henna:"Standing tall in front of the mirror, calm and ready, the Henna Hair Colour bottle visible beside her"},dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Sekarang dah bersedia untuk esok"}}
+    ]
+  },
+  {id:"suspense", labelMalay:"Suspense", descMalay:"Berlumba dengan masa - produk jadi penyelesaian last minute yang tak dijangka",
+    mood:"tense anticipation, time-pressure suspense", lighting:"cool moody light with a ticking-clock cutaway", camera:"slow push-ins, cutaways to a clock",
+    part1Beats:[
+      {scene:1,purpose:"hook",action:"Woman staring at her phone, waiting for a call that hasn't come yet",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Kenapa dia belum call lagi ni"}},
+      {scene:2,purpose:"tension",action:"Pacing back and forth across the room",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Dah nak dekat masanya ni"}},
+      {scene:3,purpose:"tension",action:"Glancing at the clock again, anxiety rising",dialogue:{hasDialogue:false}},
+      {scene:4,purpose:"build",action:"Jumping slightly as her phone buzzes with a message",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Eh dah message ke"}},
+      {scene:5,purpose:"midpoint",action:"Reading the message slowly, expression unreadable",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Okay dia dalam perjalanan"}}
+    ],
+    part2Beats:[
+      {scene:6,purpose:"twist_setup",action:"Realizing the message says the person is arriving in fifteen minutes, not calling at all",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Alamak dia nak sampai rumah sekarang"}},
+      {scene:7,purpose:"pivot",action:{inai_kuku:"Catching her reflection in a nearby mirror, noticing her bare nails",henna:"Catching her reflection in a nearby mirror, noticing her faded hair colour"},dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Takda masa dah ni kena cepat"}},
+      {scene:8,purpose:"discovery",action:{inai_kuku:"Grabbing the Inai Kuku bottle from the shelf",henna:"Grabbing the Henna Hair Colour bottle from the shelf"},dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Nasib baik ada ni dekat sini"}},
+      {scene:9,purpose:"action",action:"Fast, focused application against the clock",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Sikit lagi je"}},
+      {scene:10,purpose:"ending",action:"The doorbell rings just as she finishes, calm smile, fully ready",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Tepat pada masanya"}}
+    ]
+  },
+  {id:"happy", labelMalay:"Happy Ending", descMalay:"Cerita persahabatan yang hangat - produk muncul semulajadi sebagai sebahagian kenangan",
+    mood:"warm, joyful, feel-good", lighting:"bright natural light, golden warm tones", camera:"steady, gentle movement, warm close-ups",
+    part1Beats:[
+      {scene:1,purpose:"hook",action:"Two friends sitting on the floor surrounded by old photos, laughing together",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Dah lama gila kita tak jumpa macam ni"}},
+      {scene:2,purpose:"context",action:"One friend mentions a big reunion happening later that day",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Nanti kita jumpa semua orang lagi"}},
+      {scene:3,purpose:"build",action:"Both glancing at the clock, realizing time is passing quickly",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Eh dah petang ni jom bersiap"}},
+      {scene:4,purpose:"turn",action:"Standing up, looking through a bag of things to get ready",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Kau nampak cantik je walaupun tak buat apa"}},
+      {scene:5,purpose:"midpoint",action:"Both getting ready together, cheerful energy, music playing in the background",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Jom kita buat sikit lagi cantik"}}
+    ],
+    part2Beats:[
+      {scene:6,purpose:"twist_setup",action:"One friend pulls out a small pouch of things she brought along",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Eh bawa apa dalam beg tu"}},
+      {scene:7,purpose:"discovery",action:{inai_kuku:"Revealing the Inai Kuku bottle with a grin",henna:"Revealing the Henna Hair Colour bottle with a grin"},dialogue:{hasDialogue:true,speaker:"friend",lineMalay:{inai_kuku:"Ni lah, jom kita sapu sekali",henna:"Ni lah, jom kita touch up sikit sama sama"}}},
+      {scene:8,purpose:"action",action:"Both applying it together, taking turns, laughing",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Cantiknya bila buat sama sama macam ni"}},
+      {scene:9,purpose:"reveal",action:"Result revealed, both admiring the finish together",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Wah confirm semua orang perasan nanti"}},
+      {scene:10,purpose:"ending",action:"Warm hug, walking out the door together toward the reunion, golden light",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Jom kita pergi, dah lengkap semua"}}
+    ]
+  },
+  {id:"twist", labelMalay:"Plot Twist", descMalay:"Bermula skeptikal, produk jadi kejutan yang mengubah segalanya",
+    mood:"playful skepticism turning into delighted surprise", lighting:"natural light, brightening tone by the end", camera:"handheld casual, energetic by the end",
+    part1Beats:[
+      {scene:1,purpose:"hook",action:"Woman looking completely unimpressed, arms crossed, about to skip an event entirely",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Malas betul nak pergi majlis ni"}},
+      {scene:2,purpose:"context",action:"A friend calls, trying to convince her to come anyway",dialogue:{hasDialogue:true,speaker:"friend",lineMalay:"Confirm best kalau kau datang"}},
+      {scene:3,purpose:"build",action:"Reluctantly agreeing, but still clearly unenthusiastic",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Okay lah tapi jangan lama lama"}},
+      {scene:4,purpose:"turn",action:"Sitting down at her vanity, unmotivated, staring blankly",dialogue:{hasDialogue:false}},
+      {scene:5,purpose:"midpoint",action:"Noticing something in her drawer while looking for something else",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Eh apa benda ni dalam laci"}}
+    ],
+    part2Beats:[
+      {scene:6,purpose:"twist_setup",action:{inai_kuku:"Pulling out the Inai Kuku bottle, half-remembering someone recommended it",henna:"Pulling out the Henna Hair Colour bottle, half-remembering someone recommended it"},dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Kawan saya pernah cakap pasal ni"}},
+      {scene:7,purpose:"discovery",action:"Deciding to try it half-heartedly",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Takpe lah try je kejap"}},
+      {scene:8,purpose:"action",action:"Applying it, the colour turning out far better than expected",dialogue:{hasDialogue:false}},
+      {scene:9,purpose:"reveal",action:"Looking at the mirror, genuinely shocked at how good it looks",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Eh gila cantik pun boleh jadi macam ni"}},
+      {scene:10,purpose:"ending",action:"Practically running out the door now, completely different energy",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Jom cepat, malas dah jadi excited"}}
+    ]
+  },
+  {id:"drama", labelMalay:"Drama", descMalay:"Emosi dan bermakna - produk muncul sebagai detik kecil sebelum saat penting",
+    mood:"quiet, emotional, meaningful drama", lighting:"soft, intimate lighting with gentle contrast", camera:"slow, deliberate movement, lingering close-ups",
+    part1Beats:[
+      {scene:1,purpose:"hook",action:"Woman sitting quietly by a window, looking at an old photo",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Dah lama gila gambar ni"}},
+      {scene:2,purpose:"context",action:"A voice message plays - someone she hasn't seen in years is coming to visit today",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Tak sangka dia balik hari ni"}},
+      {scene:3,purpose:"build",action:"Sitting still for a moment, overwhelmed with emotion",dialogue:{hasDialogue:false}},
+      {scene:4,purpose:"turn",action:"Standing up slowly, looking at herself in the mirror",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Kena nampak elok sikit untuk dia"}},
+      {scene:5,purpose:"midpoint",action:"Beginning to get ready, movements slow and thoughtful",dialogue:{hasDialogue:false}}
+    ],
+    part2Beats:[
+      {scene:6,purpose:"twist_setup",action:{inai_kuku:"Opening a drawer, finding the Inai Kuku bottle tucked among old things",henna:"Opening a drawer, finding the Henna Hair Colour bottle tucked among old things"},dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Ni dia yang saya cari"}},
+      {scene:7,purpose:"discovery",action:"Holding it for a moment, a small memory attached to it",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Rasa macam dulu balik lagi"}},
+      {scene:8,purpose:"action",action:"Applying it carefully, quiet and intentional",dialogue:{hasDialogue:false}},
+      {scene:9,purpose:"reveal",action:"A soft, genuine smile in the mirror, eyes glistening slightly",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Okay saya dah sedia jumpa dia"}},
+      {scene:10,purpose:"ending",action:"The doorbell rings, she walks toward it with quiet confidence",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Lama tak jumpa macam ni pun tak sabar rasanya"}}
+    ]
+  },
+  {id:"sad", labelMalay:"Sad Story", descMalay:"Bermula sayu - produk jadi langkah kecil untuk pulih semula",
+    mood:"gentle melancholy softening into quiet comfort", lighting:"soft cool tones warming gradually by the end", camera:"still, quiet framing, slow warming shift",
+    part1Beats:[
+      {scene:1,purpose:"hook",action:"Woman sitting alone in a dim room, staring at nothing in particular",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Entahlah rasa tak bersemangat je hari ni"}},
+      {scene:2,purpose:"context",action:"Looking at her phone, an old conversation thread she hasn't opened in a while",dialogue:{hasDialogue:false}},
+      {scene:3,purpose:"build",action:"Setting the phone down, sighing quietly",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Dah lama tak rasa macam diri sendiri"}},
+      {scene:4,purpose:"turn",action:"Getting up slowly, walking toward the bathroom mirror",dialogue:{hasDialogue:false}},
+      {scene:5,purpose:"midpoint",action:"Looking at her reflection for a long moment",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Kena mula balik sikit sikit kan"}}
+    ],
+    part2Beats:[
+      {scene:6,purpose:"twist_setup",action:{inai_kuku:"Opening a drawer, finding the Inai Kuku bottle she hasn't touched in a while",henna:"Opening a drawer, finding the Henna Hair Colour bottle she hasn't touched in a while"},dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Eh ada lagi ni"}},
+      {scene:7,purpose:"discovery",action:"Holding it, deciding quietly to try again",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Jom cuba balik"}},
+      {scene:8,purpose:"action",action:"Applying it slowly, her expression softening bit by bit",dialogue:{hasDialogue:false}},
+      {scene:9,purpose:"reveal",action:"Looking at the finished result, a small genuine smile appearing",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Okay rasa lebih baik sikit sekarang"}},
+      {scene:10,purpose:"ending",action:"Standing taller, opening the curtains, warm light filling the room",dialogue:{hasDialogue:true,speaker:"woman",lineMalay:"Esok start balik semula"}}
+    ]
+  }
+];
 
 /* ==================== DATA: CHARACTER DEFAULT ==================== */
 const CHARACTER_DEFAULT = {
@@ -560,6 +961,20 @@ const CHAR_OPTIONS = {
   appearance:["Malay woman","Malay woman (hijab)","Malay man","Chinese woman","Indian woman"],
   clothing:["casual modern daily wear","office attire","traditional baju kurung","evening wear","beautician salon uniform","bridal outfit","content creator casual","university student casual","corporate blazer"]
 };
+
+/* ==================== HELPERS: product-conditional beat resolution ==================== */
+function resolveAction(action, productId){
+  return (typeof action === "string") ? action : action[productId];
+}
+function resolveBeats(beats, productId){
+  return beats.map(function(b){
+    const resolved = Object.assign({}, b, {action: resolveAction(b.action, productId)});
+    if(b.dialogue && b.dialogue.hasDialogue && typeof b.dialogue.lineMalay !== "string"){
+      resolved.dialogue = Object.assign({}, b.dialogue, {lineMalay: resolveAction(b.dialogue.lineMalay, productId)});
+    }
+    return resolved;
+  });
+}
 
 /* ==================== PROMPT TEMPLATE BUILDERS ==================== */
 function characterRefText(c){
@@ -576,10 +991,10 @@ function firstSceneImagePrompt(charRef, prodRef, beat1, style){
 }
 function fullSceneReferencePrompt(charRef, prodRef, beats, style){
   const list = beats.map((b,i)=>(i+1)+". "+b.action).join("\n");
-  return charRef+"\n"+prodRef+"\nOverall sequence (5 beats, approx 2s each, 10s total):\n"+list+"\n"+styleLine(style)+"\n"+CHARACTER_LOCK_RULE;
+  return charRef+"\n"+prodRef+"\nOverall sequence ("+beats.length+" beats, approx 2s each, "+(beats.length*2)+"s total):\n"+list+"\n"+styleLine(style)+"\n"+CHARACTER_LOCK_RULE;
 }
-function sceneImagePrompt(n, charRef, prodRef, beat, style){
-  return charRef+"\n"+prodRef+"\nScene "+n+" of 5 - purpose: "+beat.purpose+"\nAction: "+beat.action+"\n"+styleLine(style)+"\n"+CHARACTER_LOCK_RULE;
+function sceneImagePrompt(n, total, charRef, prodRef, beat, style){
+  return charRef+"\n"+prodRef+"\nScene "+n+" of "+total+" - purpose: "+beat.purpose+"\nAction: "+beat.action+"\n"+styleLine(style)+"\n"+CHARACTER_LOCK_RULE;
 }
 function combinedVideoPrompt(beats, style, character){
   const sceneLines = beats.map(function(b,i){
@@ -591,19 +1006,33 @@ function combinedVideoPrompt(beats, style, character){
   }).join("\n");
   return "Subject: character as referenced, product as referenced.\nCreate one continuous 10-second vertical short-form video made of 5 sequential scenes, approximately 2 seconds each:\n"+sceneLines+"\nCamera: "+style.camera+", framing appropriate to a vertical short-form video.\nLighting: "+style.lighting+".\nFacial expression / body movement: natural, consistent with "+character.expression+" expression throughout.\nContinuity: identical character and product appearance across all 5 scenes.\n"+PRODUCT_LOCK_RULE+"\n"+CHARACTER_LOCK_RULE+"\n"+NO_TEXT_RULE;
 }
+function continuationVideoPrompt(beats, style, character, sceneOffset){
+  const sceneLines = beats.map(function(b,i){
+    let line = "Scene "+(sceneOffset+i+1)+" ("+b.purpose+", ~2s): "+b.action+".";
+    if(b.dialogue && b.dialogue.hasDialogue){
+      line += " The "+b.dialogue.speaker+" says naturally in Malay: "+b.dialogue.lineMalay+".";
+    }
+    return line;
+  }).join("\n");
+  return "This is the SECOND 10-second half of a longer 20-second video. Continue directly from the same character, product, and setting established in the first half - do not restart, re-introduce, or repeat the opening.\nSubject: character as referenced, product as referenced.\nContinue with 5 more sequential scenes, approximately 2 seconds each, building toward a clear, satisfying ending:\n"+sceneLines+"\nCamera: "+style.camera+", framing appropriate to a vertical short-form video.\nLighting: "+style.lighting+".\nFacial expression / body movement: natural, consistent with "+character.expression+" expression throughout.\nContinuity: identical character and product appearance, continuing seamlessly from the first 10 seconds.\n"+PRODUCT_LOCK_RULE+"\n"+CHARACTER_LOCK_RULE+"\n"+NO_TEXT_RULE;
+}
 
 /* ==================== STATE ==================== */
 let state = {
   screen:"welcome",
-  product:null, angle:null, scenario:null, style:null,
+  product:null, mode:"marketing", angle:null, scenario:null, style:null, genre:null,
   character: Object.assign({}, CHARACTER_DEFAULT),
   useDefaultCharacter:true,
   activeTab:"idea"
 };
 
-const RAIL_STEPS = ["Produk","Sudut","Situasi","Gaya","Watak"];
+const RAIL_STEPS_MARKETING = ["Produk","Mod","Sudut","Situasi","Gaya","Watak"];
+const RAIL_STEPS_MOVIE = ["Produk","Mod","Genre","Watak"];
 function railIndexForScreen(){
-  return {product:0, angle:1, scenario:2, style:3, character:4}[state.screen];
+  if(state.mode==="movie"){
+    return {product:0, mode:1, genre:2, character:3}[state.screen];
+  }
+  return {product:0, mode:1, angle:2, scenario:3, style:4, character:5}[state.screen];
 }
 
 /* ==================== HELPERS ==================== */
@@ -616,8 +1045,9 @@ function scenariosForAngle(aid){ return SCENARIOS.filter(s=>s.angleId===aid); }
 function renderRail(){
   const idx = railIndexForScreen();
   if(idx===undefined) return "";
+  const steps = state.mode==="movie" ? RAIL_STEPS_MOVIE : RAIL_STEPS_MARKETING;
   let html = "<div class='rail'>";
-  RAIL_STEPS.forEach((label,i)=>{
+  steps.forEach((label,i)=>{
     let cls = "diamond";
     if(i<idx) cls += " filled";
     if(i===idx) cls += " current";
@@ -651,9 +1081,52 @@ function renderProduct(){
       "<h3>"+esc(p.nameMalay)+"</h3><p>"+esc(p.descMalay)+"</p></div>";
   });
   html += "</div></div>";
-  html += "<div class='cta-bar'><button class='btn-primary' "+(state.product?"":"disabled")+" onclick='go(\"angle\")'>Seterusnya</button></div>";
+  html += "<div class='cta-bar'><button class='btn-primary' "+(state.product?"":"disabled")+" onclick='go(\"mode\")'>Seterusnya</button></div>";
   return html;
 }
+
+function renderMode(){
+  let html = brandBar()+"<div class='screen'>";
+  html += "<div class='breadcrumb'>"+esc(state.product.nameMalay)+"</div>";
+  html += "<div class='headline'>Nak Buat Video Macam Mana?</div><div class='subline'>Pilih jenis content untuk produk ni.</div>";
+  html += "<div class='card-grid'>";
+  const mSel = state.mode==="marketing" ? " selected":"";
+  const vSel = state.mode==="movie" ? " selected":"";
+  html += "<div class='card"+mSel+"' onclick='selectMode(\"marketing\")'>"+
+    "<h3>Video Marketing</h3><p>Pilih sudut, situasi dan gaya seperti biasa - 10 saat, boleh sambung ke Scene Seterusnya untuk jadi 20 saat.</p></div>";
+  html += "<div class='card"+vSel+"' onclick='selectMode(\"movie\")'>"+
+    "<h3>Movie Inspired</h3><p>Cerita gaya movie 20 saat, 2 bahagian - pilih genre macam thriller, drama atau happy ending, produk jadi sebahagian cerita.</p>"+
+    "<span class='duration-tag'>20 SAAT</span></div>";
+  html += "</div></div>";
+  html += "<div class='cta-bar'><button class='btn-back' onclick='go(\"product\")'>&larr; Kembali</button>"+
+    "<button class='btn-primary' onclick='continueFromMode()' style='margin-top:10px;'>Seterusnya</button></div>";
+  return html;
+}
+function selectMode(m){
+  state.mode = m;
+  if(m==="marketing"){ state.genre = null; }
+  else { state.angle = null; state.scenario = null; state.style = null; }
+  render();
+}
+function continueFromMode(){
+  go(state.mode==="movie" ? "genre" : "angle");
+}
+
+function renderGenre(){
+  let html = brandBar()+"<div class='screen'>";
+  html += "<div class='breadcrumb'>"+esc(state.product.nameMalay)+" &rarr; Movie Inspired</div>";
+  html += "<div class='headline'>Pilih Genre Cerita</div><div class='subline'>Video 20 saat, 2 bahagian - produk anda jadi sebahagian daripada cerita, bukan sekadar tempelan.</div>";
+  html += "<div class='card-grid'>";
+  GENRES.forEach(g=>{
+    const sel = state.genre && state.genre.id===g.id ? " selected":"";
+    html += "<div class='card"+sel+"' onclick='selectGenre(\""+g.id+"\")'><h3>"+esc(g.labelMalay)+"</h3><p>"+esc(g.descMalay)+"</p></div>";
+  });
+  html += "</div></div>";
+  html += "<div class='cta-bar'><button class='btn-back' onclick='go(\"mode\")'>&larr; Kembali</button>"+
+    "<button class='btn-primary' "+(state.genre?"":"disabled")+" onclick='go(\"character\")' style='margin-top:10px;'>Seterusnya</button></div>";
+  return html;
+}
+function selectGenre(id){ state.genre = GENRES.find(g=>g.id===id); render(); }
 
 function renderAngle(){
   const angles = anglesForProduct(state.product.id);
@@ -666,7 +1139,7 @@ function renderAngle(){
     html += "<div class='card"+sel+"' onclick='selectAngle(\""+a.id+"\")'><h3>"+esc(a.labelMalay)+"</h3></div>";
   });
   html += "</div></div>";
-  html += "<div class='cta-bar'><button class='btn-back' onclick='go(\"product\")'>&larr; Kembali</button>"+
+  html += "<div class='cta-bar'><button class='btn-back' onclick='go(\"mode\")'>&larr; Kembali</button>"+
     "<button class='btn-primary' "+(state.angle?"":"disabled")+" onclick='go(\"scenario\")' style='margin-top:10px;'>Seterusnya</button></div>";
   return html;
 }
@@ -717,9 +1190,12 @@ function renderCharacter(){
     html += "<div class='section-note'>Watak default: "+esc(CHARACTER_DEFAULT.ageRange)+" "+esc(CHARACTER_DEFAULT.appearance)+", "+esc(CHARACTER_DEFAULT.clothing)+".</div>";
   }
   html += "</div>";
-  html += "<div class='cta-bar'><button class='btn-back' onclick='go(\"style\")'>&larr; Kembali</button>"+
+  html += "<div class='cta-bar'><button class='btn-back' onclick='backFromCharacter()'>&larr; Kembali</button>"+
     "<button class='btn-primary' onclick='generate()' style='margin-top:10px;'>Jana Prompt</button></div>";
   return html;
+}
+function backFromCharacter(){
+  go(state.mode==="movie" ? "genre" : "style");
 }
 
 function fieldSelect(label, key, options){
@@ -734,7 +1210,7 @@ function fieldSelect(label, key, options){
 
 function renderGenerating(){
   return "<div class='welcome-hero'><div class='headline'>Sedang jana prompt anda...</div>"+
-    "<div class='subline'>Watak, produk dan 5 scene sedang disusun.</div></div>";
+    "<div class='subline'>Watak, produk dan 10 scene sedang disusun.</div></div>";
 }
 
 function promptBlock(title, explainMalay, text, key){
@@ -747,20 +1223,45 @@ function promptBlock(title, explainMalay, text, key){
 }
 
 function renderResult(){
-  const p = state.product, sc = state.scenario, st = state.style, ch = state.character;
+  const p = state.product, ch = state.character;
   const charRef = characterRefText(ch);
   const prodRef = productRefText(p);
-  const beats = sc.beats;
-  const firstScene = firstSceneImagePrompt(charRef, prodRef, beats[0], st);
-  const fullScene = fullSceneReferencePrompt(charRef, prodRef, beats, st);
-  const sceneImages = beats.map((b,i)=>sceneImagePrompt(i+1, charRef, prodRef, b, st));
-  const combinedVideo = combinedVideoPrompt(beats, st, ch);
-  const labels = STRUCTURE_LABELS[sc.structureTemplate];
+
+  let title, breadcrumbParts, style, beats1, beats2, ideaExplain1, ideaExplain2, structureLabelsArr;
+
+  if(state.mode==="movie"){
+    const g = state.genre;
+    style = g;
+    beats1 = resolveBeats(g.part1Beats, p.id);
+    beats2 = resolveBeats(g.part2Beats, p.id);
+    title = g.labelMalay+" - "+p.nameMalay;
+    breadcrumbParts = [p.nameMalay, "Movie Inspired", g.labelMalay];
+    ideaExplain1 = "Genre: "+g.labelMalay+". "+g.descMalay;
+    ideaExplain2 = "Video ini 20 saat, dibahagikan kepada 2 bahagian (Part 1 dan Part 2). 5-6 scene pertama rasa macam cerita/movie sebenar - takda produk kelihatan langsung. Produk baru didedahkan lewat (sekitar Scene 6-7) sebagai twist yang semulajadi, bukan iklan yang jelas dari awal.";
+    structureLabelsArr = ["Hook","Context/Tension","Build","Turn","Midpoint","Action","Klimaks","Reveal","Relief","Ending"];
+  } else {
+    const sc = state.scenario, st = state.style;
+    style = st;
+    beats1 = sc.beats;
+    beats2 = sc.extension.beats;
+    title = sc.titleMalay;
+    breadcrumbParts = [p.nameMalay, state.angle.labelMalay, sc.titleMalay, st.labelMalay];
+    ideaExplain1 = "Produk: "+p.nameMalay+". Sudut marketing: "+state.angle.labelMalay+". Gaya video: "+st.labelMalay+".";
+    ideaExplain2 = "Sudut ini fokus kepada situasi yang rasa dekat dengan pengalaman harian pelanggan, bukan macam iklan biasa - content jenis ni biasanya lebih senang buat orang stop scroll dan percaya.";
+    structureLabelsArr = STRUCTURE_LABELS[sc.structureTemplate].concat(EXTENSION_LABELS);
+  }
+
+  const allBeats = beats1.concat(beats2);
+  const firstScene = firstSceneImagePrompt(charRef, prodRef, allBeats[0], style);
+  const fullScene = fullSceneReferencePrompt(charRef, prodRef, allBeats, style);
+  const sceneImages = allBeats.map((b,i)=>sceneImagePrompt(i+1, allBeats.length, charRef, prodRef, b, style));
+  const video1 = combinedVideoPrompt(beats1, style, ch);
+  const video2 = continuationVideoPrompt(beats2, style, ch, 5);
 
   let html = "<div class='brandbar'><div class='brand'>Inai Republic</div></div>";
   html += "<div class='screen' style='padding-top:6px;'>";
   html += "<div class='headline' style='font-size:22px;'>Prompt Anda Dah Siap</div>";
-  html += "<div class='breadcrumb'>"+esc(p.nameMalay)+" &rarr; "+esc(state.angle.labelMalay)+" &rarr; "+esc(sc.titleMalay)+" &rarr; "+esc(st.labelMalay)+"</div>";
+  html += "<div class='breadcrumb'>"+breadcrumbParts.map(esc).join(" &rarr; ")+"</div>";
 
   const tabs = [["idea","IDEA"],["watak","WATAK"],["rujukan","RUJUKAN"],["gambar","PROMPT GAMBAR"],["video","PROMPT VIDEO"]];
   html += "<div class='tabs'>";
@@ -772,10 +1273,10 @@ function renderResult(){
   html += "<div style='padding:14px 0;'>";
 
   if(state.activeTab==="idea"){
-    html += "<div class='prompt-block'><div class='prompt-title'>"+esc(sc.titleMalay)+"</div>"+
-      "<div class='prompt-explain'>Produk: "+esc(p.nameMalay)+". Sudut marketing: "+esc(state.angle.labelMalay)+". Gaya video: "+esc(st.labelMalay)+".</div>"+
-      "<div class='prompt-explain'>Sudut ini fokus kepada situasi yang rasa dekat dengan pengalaman harian pelanggan, bukan macam iklan biasa - content jenis ni biasanya lebih senang buat orang stop scroll dan percaya.</div>"+
-      "<div class='prompt-explain'>Struktur video: "+labels.join(" -> ")+" (5 scene, ~2 saat setiap satu, 10 saat keseluruhan).</div>"+
+    html += "<div class='prompt-block'><div class='prompt-title'>"+esc(title)+"</div>"+
+      "<div class='prompt-explain'>"+esc(ideaExplain1)+"</div>"+
+      "<div class='prompt-explain'>"+esc(ideaExplain2)+"</div>"+
+      "<div class='prompt-explain'>Struktur video: "+structureLabelsArr.join(" -> ")+" (10 scene, ~2 saat setiap satu, 20 saat keseluruhan).</div>"+
       "</div>";
   }
 
@@ -803,22 +1304,38 @@ function renderResult(){
   if(state.activeTab==="gambar"){
     html += promptBlock("Rujukan Watak", "Gunakan prompt ini untuk menghasilkan gambar rujukan watak.", charRef, "g-charref");
     html += promptBlock("Rujukan Produk", "Gunakan prompt ini untuk memastikan produk kekal tepat seperti asal.", prodRef, "g-prodref");
-    html += promptBlock("Rujukan Scene Pertama", "Gunakan prompt ini untuk mengunci pencahayaan dan suasana sebelum scene 1-5.", firstScene, "g-first");
-    html += promptBlock("Rujukan Keseluruhan Scene", "Gambaran keseluruhan 5 scene sebagai semakan sebelum jana satu-satu.", fullScene, "g-full");
+    html += promptBlock("Rujukan Scene Pertama", "Gunakan prompt ini untuk mengunci pencahayaan dan suasana sebelum scene 1-10.", firstScene, "g-first");
+    html += promptBlock("Rujukan Keseluruhan Scene", "Gambaran keseluruhan "+allBeats.length+" scene sebagai semakan sebelum jana satu-satu.", fullScene, "g-full");
     sceneImages.forEach((txt,i)=>{
-      html += promptBlock("Scene "+(i+1)+" - Prompt Gambar", "Gunakan prompt ini untuk menghasilkan gambar rujukan bagi Scene "+(i+1)+" ("+labels[i]+").", txt, "g-scene"+(i+1));
+      const lbl = structureLabelsArr[i] || ("Scene "+(i+1));
+      html += promptBlock("Scene "+(i+1)+" - Prompt Gambar", "Gunakan prompt ini untuk menghasilkan gambar rujukan bagi Scene "+(i+1)+" ("+lbl+").", txt, "g-scene"+(i+1));
     });
   }
 
   if(state.activeTab==="video"){
-    const dialogueLines = beats.map((b,i)=> (b.dialogue && b.dialogue.hasDialogue) ? ("Scene "+(i+1)+" ("+b.dialogue.speaker+"): "+b.dialogue.lineMalay) : null).filter(Boolean);
-    html += "<div class='prompt-block'><div class='prompt-title'>Prompt Video (5 Scene Dalam 1)</div>"+
-      "<div class='prompt-explain'>Prompt ini merangkumi kelima-lima scene dalam SATU video 10 saat - terus paste dalam AI video tool anda, tak perlu jana satu-satu.</div>";
-    if(dialogueLines.length){
-      html += "<div class='dialogue-preview'><b>Dialog dalam video ni:</b><br>"+dialogueLines.map(esc).join("<br>")+"</div>";
+    const dialogueLines1 = beats1.map((b,i)=> (b.dialogue && b.dialogue.hasDialogue) ? ("Scene "+(i+1)+" ("+b.dialogue.speaker+"): "+b.dialogue.lineMalay) : null).filter(Boolean);
+    const dialogueLines2 = beats2.map((b,i)=> (b.dialogue && b.dialogue.hasDialogue) ? ("Scene "+(i+6)+" ("+b.dialogue.speaker+"): "+b.dialogue.lineMalay) : null).filter(Boolean);
+
+    const label1 = state.mode==="movie" ? "Part 1 (0-10 Saat)" : "Scene 1-5 (0-10 Saat)";
+    const label2 = state.mode==="movie" ? "Part 2 (10-20 Saat)" : "Scene Seterusnya (10-20 Saat)";
+    const explain1 = state.mode==="movie" ? "Bahagian pertama cerita - generate dan tonton ni dulu sebelum Part 2." : "5 scene pertama dalam SATU video 10 saat - terus paste dalam AI video tool anda.";
+    const explain2 = state.mode==="movie" ? "Bahagian kedua cerita - sambung terus dari Part 1 untuk dapatkan video 20 saat penuh dengan ending yang jelas." : "Sambungan 10 saat lagi (Scene 6-10) - guna ni kalau 10 saat pertama tak cukup untuk CTA yang jelas.";
+
+    html += "<div class='prompt-block'><div class='prompt-title'>"+label1+"</div>"+
+      "<div class='prompt-explain'>"+explain1+"</div>";
+    if(dialogueLines1.length){
+      html += "<div class='dialogue-preview'><b>Dialog dalam bahagian ni:</b><br>"+dialogueLines1.map(esc).join("<br>")+"</div>";
     }
-    html += "<pre class='prompt-text' id='ptext-video'>"+esc(combinedVideo)+"</pre>"+
-      "<button class='copy-btn' onclick='copyBlock(\"ptext-video\", this)'>Copy Prompt</button></div>";
+    html += "<pre class='prompt-text' id='ptext-video1'>"+esc(video1)+"</pre>"+
+      "<button class='copy-btn' onclick='copyBlock(\"ptext-video1\", this)'>Copy Prompt</button></div>";
+
+    html += "<div class='prompt-block'><div class='prompt-title'>"+label2+"</div>"+
+      "<div class='prompt-explain'>"+explain2+"</div>";
+    if(dialogueLines2.length){
+      html += "<div class='dialogue-preview'><b>Dialog dalam bahagian ni:</b><br>"+dialogueLines2.map(esc).join("<br>")+"</div>";
+    }
+    html += "<pre class='prompt-text' id='ptext-video2'>"+esc(video2)+"</pre>"+
+      "<button class='copy-btn' onclick='copyBlock(\"ptext-video2\", this)'>Copy Prompt</button></div>";
   }
 
   html += "</div></div>";
@@ -828,7 +1345,7 @@ function renderResult(){
 
 /* ==================== NAVIGATION & ACTIONS ==================== */
 function go(screen){ state.screen = screen; render(); }
-function selectProduct(id){ state.product = PRODUCTS.find(p=>p.id===id); state.angle=null; state.scenario=null; render(); }
+function selectProduct(id){ state.product = PRODUCTS.find(p=>p.id===id); state.angle=null; state.scenario=null; state.genre=null; render(); }
 function selectAngle(id){ state.angle = ANGLES.find(a=>a.id===id); state.scenario=null; render(); }
 function selectScenario(id){ state.scenario = SCENARIOS.find(s=>s.id===id); render(); }
 function selectStyle(id){ state.style = STYLES.find(s=>s.id===id); render(); }
@@ -845,7 +1362,7 @@ function generate(){
   setTimeout(()=>{ state.screen = "result"; state.activeTab="idea"; render(); }, 700);
 }
 function resetApp(){
-  state = { screen:"welcome", product:null, angle:null, scenario:null, style:null, character:Object.assign({}, CHARACTER_DEFAULT), useDefaultCharacter:true, activeTab:"idea" };
+  state = { screen:"welcome", product:null, mode:"marketing", angle:null, scenario:null, style:null, genre:null, character:Object.assign({}, CHARACTER_DEFAULT), useDefaultCharacter:true, activeTab:"idea" };
   render();
 }
 function copyBlock(elId, btn){
@@ -889,6 +1406,8 @@ function render(){
   switch(state.screen){
     case "welcome": html = renderWelcome(); break;
     case "product": html = renderProduct(); break;
+    case "mode": html = renderMode(); break;
+    case "genre": html = renderGenre(); break;
     case "angle": html = renderAngle(); break;
     case "scenario": html = renderScenario(); break;
     case "style": html = renderStyle(); break;
