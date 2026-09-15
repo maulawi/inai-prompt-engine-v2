@@ -144,8 +144,9 @@ body{
 <script>
 /* ==================== RULES ==================== */
 const PRODUCT_LOCK_RULE = "Use the supplied product reference image as the exact visual reference. Preserve exact packaging, bottle, label, logo, typography, colours, proportions, cap, and physical shape. Do not redesign, reinterpret, simplify, replace, or invent packaging. The product must remain visually identical across every scene.";
-const CHARACTER_LOCK_RULE = "Use the character reference exactly as described. Maintain identical face, hairstyle, hair colour, skin tone, body proportions, age, clothing, accessories, and makeup across every scene. Do not alter the character's appearance between scenes.";
+const CHARACTER_LOCK_RULE = "Use the character reference exactly as described. Maintain identical face, hairstyle, hair colour, skin tone, body proportions, age, clothing, accessories, makeup, and headscarf/hijab status (worn or not worn, exactly as specified) across every scene. Do not alter the character's appearance between scenes - specifically, never add a hijab in one scene and remove it in another; the hijab status established in the reference must hold in every single scene without exception.";
 const NO_TEXT_RULE = "Do not generate any text, subtitles, captions, overlays, labels, typography, written CTA, or fake UI elements. The only text allowed is real text physically present on the product packaging itself, exactly as shown in the reference image.";
+const SPEAKER_ATTRIBUTION_RULE = "Each spoken line is attributed to a specific named character (e.g. husband, wife, friend, mother, beautician). Do not swap which character speaks a line - the person named before a line of dialogue must be the one who says it. Any supporting character named in the scenes (husband, wife, friend, mother, daughter, beautician, agent, colleague, bride, client, etc.) must keep a consistent appearance across every scene they appear in, distinct from the main referenced character.";
 
 /* ==================== DATA: PRODUCTS ==================== */
 const PRODUCTS = [
@@ -153,15 +154,18 @@ const PRODUCTS = [
     id:"inai_kuku", name:"Inai Kuku", nameMalay:"Inai Kuku",
     descMalay:"Inai moden untuk kuku dengan pilihan warna Red, Maroon dan Brown.",
     packagingLock:"Small glass nail-polish bottle with a black cap and integrated brush applicator, INAI REPUBLIC wordmark printed vertically on the bottle in white, deep red or maroon liquid visible through clear glass. Boxed version is a pink box with a diamond pattern and INAI REPUBLIC Modern Nail Henna text.",
+    applicationRule:"Application rule: the polish must be applied only onto the character's fingernails, using the brush applicator, one nail at a time. Never show the polish being applied onto the bottle, the cap, the packaging, the table, skin beyond the nail, or any other surface - that is an incorrect demo. Each finished nail should be clearly, fully coloured.",
     thumbClass:"thumb-kuku"
   },
   {
     id:"henna", name:"Inai Republic Henna Hair Colour", nameMalay:"Henna Hair Colour",
     descMalay:"Pewarna rambut Inai Republic dengan 12 pilihan warna.",
     packagingLock:"Tall maroon squeeze-applicator bottle with a comb-tip nozzle on the cap, INAI REPUBLIC wordmark on the bottle, matching maroon retail box with HENNA HAIR COLOUR Rich Even Colour text, a colour-strip graphic, and Water Permeable badge. Bottle and box always appear together, or the bottle alone with its comb-nozzle cap intact.",
+    applicationRule:"Application rule: the colour must be applied only onto the character's hair, combed through evenly using the comb-nozzle applicator. Never show the colour being applied onto the bottle, the cap, the packaging, the table, skin, or any other surface - that is an incorrect demo. Hair should be shown clearly and evenly coloured.",
     thumbClass:"thumb-henna"
   }
 ];
+
 
 /* ==================== DATA: ANGLES ==================== */
 const ANGLES = [
@@ -952,15 +956,16 @@ const GENRES = [
 
 /* ==================== DATA: CHARACTER DEFAULT ==================== */
 const CHARACTER_DEFAULT = {
-  ageRange:"late 20s", appearance:"Malay woman", hairstyle:"shoulder-length, natural hairstyle",
+  ageRange:"late 20s", appearance:"Malay woman wearing a hijab", hairstyle:"shoulder-length, natural hairstyle",
   skinTone:"light-medium", clothing:"casual modern daily wear", makeup:"natural", expression:"calm, warm"
 };
 
 const CHAR_OPTIONS = {
   ageRange:["early 20s","late 20s","30s","40s","50s"],
-  appearance:["Malay woman","Malay woman (hijab)","Malay man","Chinese woman","Indian woman"],
+  appearance:["Malay woman wearing a hijab","Malay woman not wearing a hijab","Malay man","Chinese woman wearing a hijab","Chinese woman not wearing a hijab","Indian woman wearing a hijab","Indian woman not wearing a hijab"],
   clothing:["casual modern daily wear","office attire","traditional baju kurung","modest evening attire (fully covered, elegant, not revealing)","beautician salon uniform","bridal outfit","content creator casual","university student casual","corporate blazer"]
 };
+
 
 /* ==================== HELPERS: product-conditional beat resolution ==================== */
 function resolveAction(action, productId){
@@ -978,10 +983,16 @@ function resolveBeats(beats, productId){
 
 /* ==================== PROMPT TEMPLATE BUILDERS ==================== */
 function characterRefText(c){
-  return "Reference character: a "+c.ageRange+" "+c.appearance+", "+c.hairstyle+", "+c.skinTone+" skin tone, wearing "+c.clothing+", "+c.makeup+" makeup, "+c.expression+" expression. This exact character must be used consistently in every following image and video.";
+  const app = c.appearance.toLowerCase();
+  const wearsHijab = app.indexOf("hijab") !== -1 && app.indexOf("not wearing") === -1;
+  const hairClause = wearsHijab ? "wearing a neatly styled hijab with no hair visible" : c.hairstyle;
+  const hijabNote = wearsHijab
+    ? "This character wears a hijab - the hijab must be present in every single scene without exception, and no hair may become visible at any point."
+    : "This character does not wear a hijab - hair must stay uncovered and visible in every single scene without exception.";
+  return "Reference character: a "+c.ageRange+" "+c.appearance+", "+hairClause+", "+c.skinTone+" skin tone, wearing "+c.clothing+", "+c.makeup+" makeup, "+c.expression+" expression. "+hijabNote+" This exact character must be used consistently in every following image and video.";
 }
 function productRefText(p){
-  return "Product reference: "+p.packagingLock+"\n"+PRODUCT_LOCK_RULE;
+  return "Product reference: "+p.packagingLock+"\n"+PRODUCT_LOCK_RULE+"\n"+p.applicationRule;
 }
 function styleLine(s){
   return "Style: "+s.mood+", lighting: "+s.lighting+", camera: "+s.camera;
@@ -996,7 +1007,25 @@ function fullSceneReferencePrompt(charRef, prodRef, beats, style){
 function sceneImagePrompt(n, total, charRef, prodRef, beat, style){
   return charRef+"\n"+prodRef+"\nScene "+n+" of "+total+" - purpose: "+beat.purpose+"\nAction: "+beat.action+"\n"+styleLine(style)+"\n"+CHARACTER_LOCK_RULE;
 }
-function combinedVideoPrompt(beats, style, character){
+/* Pool of natural Malaysian TikTok-live-selling closing lines, used to guarantee every
+   video's final 10 seconds actually asks for the sale instead of ending on a silent product shot. */
+const CTA_LINES = [
+  "Jangan lupa check beg kuning bawah ni",
+  "Tengah murah ni jangan tunggu lama lagi",
+  "Cepat order sebelum stock habis",
+  "Promo ni hari ni je jom cepat",
+  "Link kat beg kuning tu, order terus",
+  "Jom klik beg kuning sebelum harga naik balik",
+  "Stock terhad jangan tunggu esok",
+  "Harga ni tak selalu ada jom grab sekarang"
+];
+function pickCtaLine(id){
+  let hash = 0;
+  for(let i=0;i<id.length;i++){ hash = (hash*31 + id.charCodeAt(i)) >>> 0; }
+  return CTA_LINES[hash % CTA_LINES.length];
+}
+
+function combinedVideoPrompt(beats, style, character, product){
   const sceneLines = beats.map(function(b,i){
     let line = "Scene "+(i+1)+" ("+b.purpose+", ~2s): "+b.action+".";
     if(b.dialogue && b.dialogue.hasDialogue){
@@ -1004,9 +1033,9 @@ function combinedVideoPrompt(beats, style, character){
     }
     return line;
   }).join("\n");
-  return "Subject: character as referenced, product as referenced.\nCreate one continuous 10-second vertical short-form video made of 5 sequential scenes, approximately 2 seconds each:\n"+sceneLines+"\nCamera: "+style.camera+", framing appropriate to a vertical short-form video.\nLighting: "+style.lighting+".\nFacial expression / body movement: natural, consistent with "+character.expression+" expression throughout.\nContinuity: identical character and product appearance across all 5 scenes.\n"+PRODUCT_LOCK_RULE+"\n"+CHARACTER_LOCK_RULE+"\n"+NO_TEXT_RULE;
+  return "Subject: character as referenced, product as referenced.\nCreate one continuous 10-second vertical short-form video made of 5 sequential scenes, approximately 2 seconds each:\n"+sceneLines+"\nCamera: "+style.camera+", framing appropriate to a vertical short-form video.\nLighting: "+style.lighting+".\nFacial expression / body movement: natural, consistent with "+character.expression+" expression throughout.\nContinuity: identical character and product appearance across all 5 scenes.\n"+PRODUCT_LOCK_RULE+"\n"+CHARACTER_LOCK_RULE+"\n"+NO_TEXT_RULE+"\n"+product.applicationRule+"\n"+SPEAKER_ATTRIBUTION_RULE;
 }
-function continuationVideoPrompt(beats, style, character, sceneOffset){
+function continuationVideoPrompt(beats, style, character, sceneOffset, product, contextId){
   const sceneLines = beats.map(function(b,i){
     let line = "Scene "+(sceneOffset+i+1)+" ("+b.purpose+", ~2s): "+b.action+".";
     if(b.dialogue && b.dialogue.hasDialogue){
@@ -1014,7 +1043,9 @@ function continuationVideoPrompt(beats, style, character, sceneOffset){
     }
     return line;
   }).join("\n");
-  return "This is the SECOND 10-second half of a longer 20-second video. Continue directly from the same character, product, and setting established in the first half - do not restart, re-introduce, or repeat the opening.\nSubject: character as referenced, product as referenced.\nContinue with 5 more sequential scenes, approximately 2 seconds each, building toward a clear, satisfying ending:\n"+sceneLines+"\nCamera: "+style.camera+", framing appropriate to a vertical short-form video.\nLighting: "+style.lighting+".\nFacial expression / body movement: natural, consistent with "+character.expression+" expression throughout.\nContinuity: identical character and product appearance, continuing seamlessly from the first 10 seconds.\n"+PRODUCT_LOCK_RULE+"\n"+CHARACTER_LOCK_RULE+"\n"+NO_TEXT_RULE;
+  const ctaLine = pickCtaLine(contextId);
+  const lastScene = sceneOffset+beats.length;
+  return "This is the SECOND 10-second half of a longer 20-second video. Continue directly from the same character, product, and setting established in the first half - do not restart, re-introduce, or repeat the opening.\nSubject: character as referenced, product as referenced.\nContinue with 5 more sequential scenes, approximately 2 seconds each, building toward a clear, satisfying ending:\n"+sceneLines+"\nMandatory closing CTA: in the final 1-2 seconds of Scene "+lastScene+", the main character turns to speak directly to camera, breaking from the scene, and says naturally in Malay: "+ctaLine+".\nCamera: "+style.camera+", framing appropriate to a vertical short-form video.\nLighting: "+style.lighting+".\nFacial expression / body movement: natural, consistent with "+character.expression+" expression throughout.\nContinuity: identical character and product appearance, continuing seamlessly from the first 10 seconds.\n"+PRODUCT_LOCK_RULE+"\n"+CHARACTER_LOCK_RULE+"\n"+NO_TEXT_RULE+"\n"+product.applicationRule+"\n"+SPEAKER_ATTRIBUTION_RULE;
 }
 
 /* ==================== STATE ==================== */
@@ -1255,8 +1286,9 @@ function renderResult(){
   const firstScene = firstSceneImagePrompt(charRef, prodRef, allBeats[0], style);
   const fullScene = fullSceneReferencePrompt(charRef, prodRef, allBeats, style);
   const sceneImages = allBeats.map((b,i)=>sceneImagePrompt(i+1, allBeats.length, charRef, prodRef, b, style));
-  const video1 = combinedVideoPrompt(beats1, style, ch);
-  const video2 = continuationVideoPrompt(beats2, style, ch, 5);
+  const contextId = state.mode==="movie" ? state.genre.id : state.scenario.id;
+  const video1 = combinedVideoPrompt(beats1, style, ch, p);
+  const video2 = continuationVideoPrompt(beats2, style, ch, 5, p, contextId);
 
   let html = "<div class='brandbar'><div class='brand'>Inai Republic</div></div>";
   html += "<div class='screen' style='padding-top:6px;'>";
@@ -1281,8 +1313,11 @@ function renderResult(){
   }
 
   if(state.activeTab==="watak"){
+    const appLower = ch.appearance.toLowerCase();
+    const wearsHijabDisplay = appLower.indexOf("hijab") !== -1 && appLower.indexOf("not wearing") === -1;
+    const hairDisplay = wearsHijabDisplay ? "memakai tudung" : ch.hairstyle;
     html += "<div class='prompt-block'><div class='prompt-title'>Watak Dalam Video</div>"+
-      "<div class='prompt-explain'>"+esc(ch.ageRange)+" "+esc(ch.appearance)+", "+esc(ch.hairstyle)+", pakai "+esc(ch.clothing)+". Watak ni akan kekal sama dalam semua scene.</div></div>";
+      "<div class='prompt-explain'>"+esc(ch.ageRange)+" "+esc(ch.appearance)+", "+esc(hairDisplay)+", pakai "+esc(ch.clothing)+". Watak ni akan kekal sama (termasuk status tudung) dalam semua scene.</div></div>";
     html += promptBlock("Rujukan Watak", "Guna prompt ini untuk menghasilkan gambar rujukan watak.", charRef, "charref");
   }
 
@@ -1291,10 +1326,18 @@ function renderResult(){
       "<div class='prompt-explain'>Peraturan ini memastikan produk kekal sama seperti gambar asal dalam setiap scene.</div>"+
       "<pre class='prompt-text' id='ptext-rule-product'>"+esc(PRODUCT_LOCK_RULE)+"</pre>"+
       "<button class='copy-btn' onclick='copyBlock(\"ptext-rule-product\", this)'>Copy Prompt</button></div>";
+    html += "<div class='prompt-block'><div class='prompt-title'>Peraturan Cara Sapu Produk</div>"+
+      "<div class='prompt-explain'>Peraturan ini memastikan produk disapu pada tempat yang betul (kuku atau rambut) - bukan calit pada botol atau permukaan lain.</div>"+
+      "<pre class='prompt-text' id='ptext-rule-application'>"+esc(p.applicationRule)+"</pre>"+
+      "<button class='copy-btn' onclick='copyBlock(\"ptext-rule-application\", this)'>Copy Prompt</button></div>";
     html += "<div class='prompt-block'><div class='prompt-title'>Peraturan Watak</div>"+
-      "<div class='prompt-explain'>Peraturan ini memastikan watak kekal sama dari scene pertama sampai scene terakhir.</div>"+
+      "<div class='prompt-explain'>Peraturan ini memastikan watak (termasuk status tudung) kekal sama dari scene pertama sampai scene terakhir.</div>"+
       "<pre class='prompt-text' id='ptext-rule-character'>"+esc(CHARACTER_LOCK_RULE)+"</pre>"+
       "<button class='copy-btn' onclick='copyBlock(\"ptext-rule-character\", this)'>Copy Prompt</button></div>";
+    html += "<div class='prompt-block'><div class='prompt-title'>Peraturan Watak Sokongan & Dialog</div>"+
+      "<div class='prompt-explain'>Peraturan ini memastikan dialog tak tertukar antara watak (contoh: suami tak tiba-tiba jadi orang yang cakap dialog isteri).</div>"+
+      "<pre class='prompt-text' id='ptext-rule-speaker'>"+esc(SPEAKER_ATTRIBUTION_RULE)+"</pre>"+
+      "<button class='copy-btn' onclick='copyBlock(\"ptext-rule-speaker\", this)'>Copy Prompt</button></div>";
     html += "<div class='prompt-block'><div class='prompt-title'>Peraturan Tanpa Teks</div>"+
       "<div class='prompt-explain'>Video tidak boleh ada subtitle, caption atau teks tambahan - kecuali teks asli pada packaging produk.</div>"+
       "<pre class='prompt-text' id='ptext-rule-notext'>"+esc(NO_TEXT_RULE)+"</pre>"+
